@@ -21,7 +21,7 @@ jobs:
           - { os: windows-latest, triple: x86_64-pc-windows-msvc }
     runs-on: ${{ matrix.target.os }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.1.7
 
       - name: Install Rust
         run: |
@@ -45,7 +45,7 @@ jobs:
           cp "target/${{ matrix.target.triple }}/release/${BIN}" "dist/${BIN}-${{ matrix.target.triple }}"
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4.3.6
         with:
           name: ${{ matrix.target.triple }}
           path: dist/*
@@ -54,16 +54,16 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.1.7
 
       - name: Download artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v4.1.8
         with:
           pattern: "*"
           path: dist/
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v2.0.8
         with:
           files: dist/*
           generate_release_notes: true
